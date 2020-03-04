@@ -1,0 +1,57 @@
+import java.util.*;
+public class List<E> {
+	    private int size = 0;
+	    private static final int DEFAULT_CAPACITY = 10;
+	    private Object elements[];
+	    public List() {
+	        elements = new Object[DEFAULT_CAPACITY];
+	        for(int s=0;s<10;s++)
+	        {
+	        	elements[size++] = s+1;
+	        }
+	    }
+	    public void add(E e) {
+	        if (size == elements.length) {
+	            ensureCapacity();
+	        }
+	        elements[size++] = e;
+	    }
+	    public E  fetch(int s) {
+	        if (s >= size || s< 0) {
+	            throw new IndexOutOfBoundsException("Index: " + s + ", Size " + s);
+	        }
+	        return (E) elements[s];
+	    }
+	    public E remove(int s) {
+	        if (s >= size || s < 0) {
+	            throw new IndexOutOfBoundsException("Index: " + s + ", Size " + s);
+	        }
+	        Object item = elements[s];
+	        int numElts = elements.length - ( s + 1 ) ;
+	        System.arraycopy( elements, s + 1, elements, s, numElts ) ;
+	        size--;
+	        return (E) item;
+	    }
+	    
+	    public int size() {
+	        return size;
+	    }
+	    public String toString() 
+	    {
+	         StringBuilder sb = new StringBuilder();
+	         for(int s = 0; s < size ;s++) {
+	             sb.append(elements[s].toString());
+	             if(s<size-1){
+	                 sb.append(" ");
+	             }
+	         }
+	         return sb.toString();
+	    }
+	     
+	    private void ensureCapacity() {
+	        int newSize = elements.length * 2;
+	        elements = Arrays.copyOf(elements, newSize);
+	    }
+	
+
+}
